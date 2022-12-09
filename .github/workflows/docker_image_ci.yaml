@@ -23,3 +23,14 @@ jobs:
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_PAT }}
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+    
+    - name: Build and push
+      uses: docker/build-push-action@v3
+      with:
+        context: .
+        file: ./Dockerfile
+        push: true
+        tags: ${{ secrets.DOCKER_HUB_USERNAME }}/notmuch:latest
